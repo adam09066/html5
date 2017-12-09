@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sportágak</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/small-business.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> 
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Sport</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Sports
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="season.html">Season</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="seria.html">Seria</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href=""></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+	<div class="album text-muted">
+    <!-- Page Content -->
+		<div class="container">
+		<div class="form-group">
+                <div class="form-group">
+                <label for="name">Hanyadik elemtől:</label>
+                <input type="text" class="form-control" id="tol" placeholder="3-tól">
+				</div>
+				<div class="form-group">
+					<label for="description">Meddig:</label>
+					<textarea  class="form-control" id="db" placeholder="db"></textarea>
+				</div>
+				<button type="button" id="myButton" class="btn btn-primary">Submit</button>
+				<p></p>
+		  <!-- Heading Row -->
+		  <div class="row">
+			
+			<!-- /.col-md-4 -->
+		  </div>
+		  <!-- /.row -->
+
+
+
+		</div>
+		<!-- /.container -->
+	</div>
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Adam Nagy Website 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	<script>
+				var tol=window.location.href.split("?=")[1];
+				console.log(tol);
+				var db=window.location.href.split("?=")[2];
+				console.log(db);
+				
+		 function reqListener(){
+
+				for(var i in this.response.rows) {
+                    console.log(this.response.rows[i].name);
+                    var x = document.createElement("a");
+					x.href = "seria_prop.html?id="+this.response.rows[i].id;
+					x.textContent = this.response.rows[i].name;
+					x.className="card";
+					document.querySelector(".row").appendChild(x);
+				}
+            }
+
+				
+		var oReq = new XMLHttpRequest();
+            oReq.responseType = "json";
+            oReq.addEventListener("load", reqListener);
+            oReq.open("GET", "http://94.177.230.203:8080/sport/rest/seria/entity/page?order=asc&offset="+tol+"&limit="+db);
+            oReq.send();	
+
+		
+    </script>
+	
+	<script type="text/javascript">
+		document.getElementById("myButton").onclick = function () {
+			location.href = "seria2.html?="+document.getElementById("tol").value+"?="+document.getElementById("db").value;
+		};
+	</script>
+
+	
+  </body>
+
+</html>
